@@ -14,6 +14,7 @@ const kb60 = document.querySelector('[data-kb-60]')
 const kb75 = document.querySelector('[data-kb-75]')
 const aboutBtn = document.querySelector('[data-info-btn]')
 const aboutInfo = document.querySelector('[data-info]')
+const homeBtn = document.querySelector('[data-home]')
 
 //stores keys of current kb type
 let keys 
@@ -27,16 +28,29 @@ window.addEventListener('DOMContentLoaded', () => {
     if(theme === 'dark') {
         ui.theme() 
     }
-    ui.refreshSelectedKB()
+    ui.refreshSelectedContent()
 
 })
-//event: toggle theme
-box.addEventListener('change', () => ui.theme())
+
+//event: home btn 
+homeBtn.addEventListener('click', () => {
+    storage.saveSelectedContent('home')
+    ui.refreshSelectedContent()
+})
+
+//event: about btn
+aboutBtn.addEventListener('click', () => {
+   storage.saveSelectedContent('about')
+   ui.refreshSelectedContent()
+})
 
 //event: open select-kb modal
 selectKBbtn.addEventListener('click', () => {
     modalSelKBCon.classList.add('active')
 })
+
+//event: toggle theme
+box.addEventListener('change', () => ui.theme())
 
 //event: escape key to close
 document.addEventListener('keydown', e =>{
@@ -47,30 +61,29 @@ document.addEventListener('keydown', e =>{
 
 //event: select 60%
 select60.addEventListener('click', () => {
-    kb60.classList.add('active')
-    kb75.classList.remove('active')
-    ui.closeModal()
     storage.saveSelectedKB('sixty')
+    ui.closeModal()
+    ui.refreshSelectedContent()
+    
 })
 
 //event: select 75%
 select75.addEventListener('click', () => {
-    kb75.classList.add('active')
-    kb60.classList.remove('active')
-    ui.closeModal()
     storage.saveSelectedKB('seventyFive')
+    ui.closeModal()
+    ui.refreshSelectedContent()
+    
 })
 
 //event: keydown
 document.addEventListener('keydown', e => {
-    const keyCode = e.code
-    // if(keys) {
 
-    // }
-    const key = keys.find(key => {
-        return key.dataset.key === e.code
-    })
-    key.classList.add('active')
+        const key = keys.find(key => {
+            return key.dataset.key === e.code
+        })
+        if(key != undefined){
+            key.classList.add('active')
+        }
 })
 
 //event: keyup
@@ -78,14 +91,13 @@ document.addEventListener('keyup', e => {
     const key = keys.find(key => {
         return key.dataset.key === e.code
     })
-    key.classList.remove('active')
+    if(key != undefined){
+        key.classList.remove('active')
+    }
 
 })
 
-//event: about btn
-aboutBtn.addEventListener('click', () => {
-    aboutInfo.classList.add('active')
-})
+
 
 
 //FUNCTIONS 
@@ -103,6 +115,13 @@ const storage = {
     },
     checkSelectedKB() {
         return localStorage.getItem('keyboardapp.selectedKB')
+    },
+    saveSelectedContent(value) {
+        localStorage.setItem('keyboardapp.selectedContent', `${value}`)
+    },
+    checkSelectedContent() {
+        return localStorage.getItem('keyboardapp.selectedContent')
+
     }
 
 }
@@ -125,16 +144,27 @@ const ui = {
             modalCon.classList.remove('active')
         })
     },
-    refreshSelectedKB(){
-        const selection = storage.checkSelectedKB()
+    refreshSelectedContent(){
+        const activeElements = [...document.querySelectorAll('.active')]
+        activeElements.forEach(element => {
+            element.classList.remove('active')
+        })
+        const selection = storage.checkSelectedContent()
         if (!selection) {
             return   
-        } else if (selection == 'sixty') {
-            kb60.classList.add('active')
-            setKeys('sixty')
-        } else if (selection == 'seventyFive'){
-            kb75.classList.add('active')
-            setKeys('seventyFive')
+        } else if (selection == 'home') {
+            const kbSelection = storage.checkSelectedKB()
+            if(!kbSelection) {
+                return
+            } else if (kbSelection == 'sixty') {
+                kb60.classList.add('active')
+                setKeys('sixty')
+            } else if (kbSelection == 'seventyFive'){
+                kb75.classList.add('active')
+                setKeys('seventyFive')
+            }
+        } else if (selection == 'about') {
+            aboutInfo.classList.add('active')
         }
     }
    
