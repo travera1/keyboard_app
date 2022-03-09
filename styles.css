@@ -598,26 +598,6 @@ footer {
     transform: scale(.55);
 }
 
-@media screen and (max-width: 1000px) {
-
-    .keyboard-container {
-        transform: scale(.65)
-    }
-}
-@media screen and (max-width: 900px) {
-
-    .keyboard-container {
-        transform: scale(.55)
-    }
-}
-@media screen and (max-width: 800px) {
-
-    .keyboard-container {
-        transform: scale(.45)
-    }
-}
-
-
 @media screen and (max-width: 600px) {
     .modal-content .keyboard-container {
         transform: scale(.32)
