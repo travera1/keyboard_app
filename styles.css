@@ -47,9 +47,9 @@ ul {
 
 .main-nav img {
     width: 35px;
-    margin-top: .6rem;
-    opacity: .3;
-    transition: all .2s linear;
+    margin-top: .5rem;
+    opacity: .5;
+    transition: all .15s linear;
 }
 
 .main-nav img:hover {
@@ -140,7 +140,7 @@ ul {
 }
 
 .keyboard-container {
-    border: 3px solid silver;
+    border: 3px solid rgb(165, 165, 165);
     border-radius: 7px;
     margin: 1rem;
     margin-top: 2rem;
@@ -208,6 +208,8 @@ ul {
 .key {
     height: 56px;
     border: 1px solid var(--secondary);
+    border-color: #555;
+    border-radius: 2px;
     padding: .4rem;
     text-align: center;
     margin: .1rem;
@@ -540,15 +542,24 @@ ul {
     width: 100%;
 }
 .modal-content {
-    padding: 1.5rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    
     
     
 }
 
 .modal-content .keyboard-container {
     transform: scale(.5);
-
+    height: min-content;
+    flex: 0 0 auto;
+    display: inline-block;
+    margin:0;
+    transition: all 30ms linear;
 } 
+
+.modal-content .keyboard-container:hover {
+    transform: scale(.55);
+}

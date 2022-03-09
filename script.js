@@ -1,11 +1,14 @@
 //QUERY SELECTORS
-const keyboard = document.querySelector('[data-keyboard]')
+// const keyboard = document.querySelector('[data-keyboard]')
 const keys = [...document.querySelectorAll('.key')]
 const box = document.getElementById('box')
-const selectKB = document.querySelector('[data-select-kb]')
+const selectKBbtn = document.querySelector('[data-select-kb-btn]')
 const modalSelKBCon = document.querySelector('[data-modal-sel-kb-con]')
 const modalCons = [...document.querySelectorAll('.modal-con')]
-
+const select60 = document.querySelector('[data-select-60]')
+const select75 = document.querySelector('[data-select-75]')
+const kb60 = document.querySelector('[data-kb-60]')
+const kb75 = document.querySelector('[data-kb-75]')
 
 //EVENT LISTENERS
 
@@ -22,17 +25,29 @@ window.addEventListener('DOMContentLoaded', () => {
 box.addEventListener('change', () => ui.theme())
 
 //event: open select-kb modal
-selectKB.addEventListener('click', () => {
+selectKBbtn.addEventListener('click', () => {
     modalSelKBCon.classList.add('active')
 })
 
 //event: escape key to close
 document.addEventListener('keydown', e =>{
     if(e.code == 'Escape') {
-        modalCons.forEach(modalCon => {
-            modalCon.classList.remove('active')
-        })
+        ui.closeModal()
     }
+})
+
+//event: select 60%
+select60.addEventListener('click', () => {
+    kb60.classList.add('active')
+    kb75.classList.remove('active')
+    ui.closeModal()
+})
+
+//event: select 75%
+select75.addEventListener('click', () => {
+    kb75.classList.add('active')
+    kb60.classList.remove('active')
+    ui.closeModal()
 })
 
 //event: keydown
@@ -78,6 +93,11 @@ const ui = {
             storage.saveTheme('light')
             ball.style.transform = 'translate(0px)'
         }
+    },
+    closeModal() {
+        modalCons.forEach(modalCon => {
+            modalCon.classList.remove('active')
+        })
     }
 }
 
