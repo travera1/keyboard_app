@@ -32,11 +32,36 @@ header {
 
 .logo{
     font-size: 2.4rem;
+    padding-right: 1rem;
 }
 
 ul {
+    display: flex;
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    text-align: center;
+    color: var(--accent);
+}
+ul a {
+    padding: 0;
+    color: #777;
+    display: flex;
+    align-items: center;
+    font-weight: 200;
+    opacity: .5;
+    transition: all .2s linear;
+}
+
+ul a:hover {
+    opacity: 1;
+}
+
+footer ul a img {
+    padding-right: .3rem;
 }
 
 .nav-info {
@@ -57,7 +82,7 @@ ul {
 }
 
 .main-nav a {
-    padding: 1rem;
+    padding: .5rem;
 }
 
 
@@ -66,7 +91,7 @@ ul {
     justify-content: flex-end;
     align-items: center;
     margin: 0;
-    transform: scale(.6);
+    transform: scale(.4);
 
 }
 
@@ -127,6 +152,7 @@ ul {
 }
 .main-container{
     margin: 0 auto;
+    flex-grow: 1;
 }
 .flex-grow {
     display: flex;
@@ -510,6 +536,11 @@ ul {
 
 }
 
+footer {
+    margin: 1rem 0 1.5rem;
+    width: 100%;
+}
+
 .modal-con{
     position: fixed;
     top: 0;
@@ -518,7 +549,7 @@ ul {
     left: 0;
     z-index: 10;
     background-color: var(--secondary);
-
+    overflow: hidden;
     display: none;
 
 }
@@ -536,7 +567,11 @@ ul {
     background: var(--primary);
     border-radius: 15px;
     z-index: 11;
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none
 }
+.modal::-webkit-scrollbar { width: 0 ! important }
 
 .modal header > h2{
     text-align: center;
@@ -547,9 +582,6 @@ ul {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    
-    
-    
 }
 
 .modal-content .keyboard-container {
@@ -559,8 +591,38 @@ ul {
     display: inline-block;
     margin:0;
     transition: all 30ms linear;
+    top: 3px;
 } 
 
 .modal-content .keyboard-container:hover {
     transform: scale(.55);
+}
+
+@media screen and (max-width: 1000px) {
+
+    .keyboard-container {
+        transform: scale(.65)
+    }
+}
+@media screen and (max-width: 900px) {
+
+    .keyboard-container {
+        transform: scale(.55)
+    }
+}
+@media screen and (max-width: 800px) {
+
+    .keyboard-container {
+        transform: scale(.45)
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .modal-content .keyboard-container {
+        transform: scale(.32)
+    }
+    .modal-content .keyboard-container:hover {
+        transform: scale(.34);
+    }
 }
