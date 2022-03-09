@@ -536,8 +536,35 @@ footer ul a img {
 
 }
 
+.about-info {
+    font-weight: 200;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 01px;
+    display: none;
+    padding: 1rem 4rem;
+}
+
+.about-info.active {
+    display: block;
+}
+
+.title {
+    color: var(--accent);
+    opacity: .5;
+}
+.text-title {
+    color: var(--accent);
+    opacity: .5;
+    margin-bottom: 0;
+}
+.text {
+    margin-top: 0;
+    color: var(--accent)
+}
+
 footer {
     margin: 1rem 0 1.5rem;
+    padding: 0 1rem;
     width: 100%;
 }
 

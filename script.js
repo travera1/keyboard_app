@@ -12,6 +12,8 @@ const select60 = document.querySelector('[data-select-60]')
 const select75 = document.querySelector('[data-select-75]')
 const kb60 = document.querySelector('[data-kb-60]')
 const kb75 = document.querySelector('[data-kb-75]')
+const aboutBtn = document.querySelector('[data-info-btn]')
+const aboutInfo = document.querySelector('[data-info]')
 
 //stores keys of current kb type
 let keys 
@@ -28,7 +30,6 @@ window.addEventListener('DOMContentLoaded', () => {
     ui.refreshSelectedKB()
 
 })
-
 //event: toggle theme
 box.addEventListener('change', () => ui.theme())
 
@@ -69,7 +70,6 @@ document.addEventListener('keydown', e => {
     const key = keys.find(key => {
         return key.dataset.key === e.code
     })
-    console.log(key)
     key.classList.add('active')
 })
 
@@ -80,6 +80,11 @@ document.addEventListener('keyup', e => {
     })
     key.classList.remove('active')
 
+})
+
+//event: about btn
+aboutBtn.addEventListener('click', () => {
+    aboutInfo.classList.add('active')
 })
 
 
@@ -132,6 +137,7 @@ const ui = {
             setKeys('seventyFive')
         }
     }
+   
 }
 
 // helpers 
