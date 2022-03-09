@@ -203,8 +203,7 @@ ul {
 }
 .sixty > .row-5                                               {
     display: grid;
-    grid-template-columns: repeat(3, 5fr) 25fr repeat(4, 5fr)
-    /* grid-template-columns: repeat(3, 4.5fr) 20fr repeat(2, 4.5fr); */
+    grid-template-columns: repeat(3, 5fr) 25fr repeat(4, 5fr);
 }
 .key {
     height: 56px;
@@ -220,8 +219,9 @@ ul {
 }
 
 .sixty .key {
-    padding-left: 1.3rem;
-    padding-right: 1.3rem;
+    height: 55px;
+    padding-left: .7rem;
+    padding-right: .7rem;
 }
 .dark .key {
     background: var(--primary);
@@ -266,6 +266,64 @@ ul {
     font-size: 1.2rem;
     font-weight: bold;
     align-items: flex-start;
+}
+
+.one > span, .two > span, .three > span, .four > span, .five > span, .six > span, 
+.sev > span, .eight > span, .nine > span,.zero > span, .minus > span, .equal > span,
+.semi > span, .quote > span, .comma > span, .per > span, .slash > span {
+    padding-left: .6rem;
+}
+
+.two span, .nine span, .zero span {
+    font-size: .9rem;
+    padding-top: .1rem;
+    font-weight: 800;
+}
+
+.six span, .eight span {
+    margin-top: .1rem;
+    font-size: 1.6rem;
+}
+
+.comma span, .per span {
+    font-size: 1.2rem;
+    margin-top: .2rem;
+}
+
+.minus span {
+    margin-top: -.5rem;
+    padding-top: .1rem;
+}
+
+.key.backslash {
+    position: relative;
+}
+
+.key.backslash::before{
+    content: '';
+    position: absolute;
+    background-color: var(--accent);
+    width: 2px;
+    height: 14px;
+    top: 6px;
+    left: 50px;
+}
+
+.key.backslash::after{
+    content: '';
+    position: absolute;
+    background-color: var(--accent);
+    width: 2px;
+    height: 14px;
+    top: 6px;
+    left: 30px;
+    transform: rotate(-20deg);
+}
+
+.key.backslash span{
+    font-size: .9rem;
+    padding-top: .1rem;
+    padding-left: 1rem;
 }
 
 .key.backquote{
