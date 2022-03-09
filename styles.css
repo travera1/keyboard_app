@@ -14,22 +14,66 @@ body {
     transition: background .2s linear;
 }
 
-
-
 body.dark {
     --primary: #222;
     color: var(--accent);
     --secondary: #111;
 }
 
+header {
+    display: flex;
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid var(--accent);
+}
+
+.logo{
+    font-size: 2.4rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-nav img {
+    width: 35px;
+    margin-top: .6rem;
+    opacity: .3;
+    transition: all .2s linear;
+}
+
+.main-nav img:hover {
+    opacity: 1;
+}
+
+.main-nav a {
+    padding: 1rem;
+}
+
+
 .toggle-container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 100%;
-    margin:1rem 0;
-    padding: 0;
-    transform: scale(.8)
+    margin: 0;
+    transform: scale(.6);
+
+}
+
+.label-container {
+    border: 2px solid #999;
+    border-radius: 40px;
+    padding: .4rem;
 }
 
 .box {
@@ -78,7 +122,8 @@ body.dark {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
+    
 }
 .main-container{
     margin: 0 auto;
@@ -86,6 +131,7 @@ body.dark {
 .flex-grow {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .flex {
     display: flex;
@@ -97,6 +143,7 @@ body.dark {
     border: 3px solid silver;
     border-radius: 7px;
     margin: 1rem;
+    margin-top: 2rem;
     display: none;
 }
 
@@ -172,13 +219,62 @@ body.dark {
     justify-content: center;
 }
 
+.sixty .key {
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
+}
 .dark .key {
     background: var(--primary);
     border-color: #fff;
 }
 
-.key.home, .key.pgdn {
+.key.alphabet, .key.fn {
+    padding: 2px .05rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.key.upper {
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+/* crucial  */
+.key.home, .key.pgdn, .key.pgup, .key.end {
     font-size: .8rem;
+}
+
+.key.esc > span, .key.del > span, .upper span {
+    font-size: .8rem;
+    padding-top: 6px;
+}
+
+.home > span, .pgdn > span, .pgup > span, .end > span {
+    font-size: .8rem;
+    /* padding-top: .1rem; */
+    padding-top: 0rem;
+}
+
+
+.key.esc, .key.del {
+    padding: 2px .05rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.key.dual-fn {
+    padding:  2px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    align-items: flex-start;
+}
+
+.key.backquote{
+    font-size: 1.7rem;
+}
+
+.key.backquote span{
+    margin-top: -.5rem;
+    padding-left: 12px;
 }
 
 .key.active {
@@ -352,3 +448,49 @@ body.dark {
     background-color: var(--accent);
 
 }
+
+.modal-con{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background-color: var(--secondary);
+
+    display: none;
+
+}
+
+.modal-con.active {
+    display: block;
+}
+
+.modal {
+    width: 84%;
+    height: 90%;
+    position: fixed;
+    top: 5%;
+    right: 8%;
+    background: var(--primary);
+    border-radius: 15px;
+    z-index: 11;
+}
+
+.modal header > h2{
+    text-align: center;
+    width: 100%;
+}
+.modal-content {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    
+}
+
+.modal-content .keyboard-container {
+    transform: scale(.5);
+
+} 

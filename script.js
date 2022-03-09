@@ -2,7 +2,9 @@
 const keyboard = document.querySelector('[data-keyboard]')
 const keys = [...document.querySelectorAll('.key')]
 const box = document.getElementById('box')
-
+const selectKB = document.querySelector('[data-select-kb]')
+const modalSelKBCon = document.querySelector('[data-modal-sel-kb-con]')
+const modalCons = [...document.querySelectorAll('.modal-con')]
 
 
 //EVENT LISTENERS
@@ -18,6 +20,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //event: toggle theme
 box.addEventListener('change', () => ui.theme())
+
+//event: open select-kb modal
+selectKB.addEventListener('click', () => {
+    modalSelKBCon.classList.add('active')
+})
+
+//event: escape key to close
+document.addEventListener('keydown', e =>{
+    if(e.code == 'Escape') {
+        modalCons.forEach(modalCon => {
+            modalCon.classList.remove('active')
+        })
+    }
+})
 
 //event: keydown
 document.addEventListener('keydown', e => {
@@ -56,6 +72,7 @@ const ui = {
         document.body.classList.toggle('dark');
         if (document.body.classList.contains('dark')) {
             storage.saveTheme('dark')
+            //move ball
             ball.style.transform = 'translate(48px)'
         } else {
             storage.saveTheme('light')
