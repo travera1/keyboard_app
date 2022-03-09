@@ -1,6 +1,9 @@
 //QUERY SELECTORS
 // const keyboard = document.querySelector('[data-keyboard]')
-const keys = [...document.querySelectorAll('.key')]
+// const keys = [...document.querySelectorAll('.key')]
+const sixtyKeys = [...document.querySelectorAll('[data-kb-60] .key')]
+const seventyFiveKeys = [...document.querySelectorAll('[data-kb-75] .key')]
+
 const box = document.getElementById('box')
 const selectKBbtn = document.querySelector('[data-select-kb-btn]')
 const modalSelKBCon = document.querySelector('[data-modal-sel-kb-con]')
@@ -9,6 +12,9 @@ const select60 = document.querySelector('[data-select-60]')
 const select75 = document.querySelector('[data-select-75]')
 const kb60 = document.querySelector('[data-kb-60]')
 const kb75 = document.querySelector('[data-kb-75]')
+
+//stores keys of current kb type
+let keys 
 
 //EVENT LISTENERS
 
@@ -57,9 +63,13 @@ select75.addEventListener('click', () => {
 //event: keydown
 document.addEventListener('keydown', e => {
     const keyCode = e.code
+    // if(keys) {
+
+    // }
     const key = keys.find(key => {
         return key.dataset.key === e.code
     })
+    console.log(key)
     key.classList.add('active')
 })
 
@@ -84,6 +94,7 @@ const storage = {
     },
     saveSelectedKB(value) {
         localStorage.setItem('keyboardapp.selectedKB', `${value}`)
+        setKeys(value)
     },
     checkSelectedKB() {
         return localStorage.getItem('keyboardapp.selectedKB')
@@ -115,9 +126,24 @@ const ui = {
             return   
         } else if (selection == 'sixty') {
             kb60.classList.add('active')
+            setKeys('sixty')
         } else if (selection == 'seventyFive'){
             kb75.classList.add('active')
+            setKeys('seventyFive')
         }
+    }
+}
+
+// helpers 
+
+function setKeys() {
+    const kbType = storage.checkSelectedKB()
+    if(kbType == 'sixty') {
+        keys = sixtyKeys
+    } else if (kbType == 'seventyFive') {
+        keys =  seventyFiveKeys
+    } else {
+        return
     }
 }
 

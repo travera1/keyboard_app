@@ -218,6 +218,7 @@ ul {
     font-size: .7rem;
     display: flex;
     justify-content: center;
+    transition: background .2s linear;
 }
 
 .sixty .key {
