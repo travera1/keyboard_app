@@ -537,7 +537,8 @@ footer ul a img {
 }
 
 footer {
-    margin: 1rem 0 1.5rem;
+    margin: 1rem 1.5rem;
+    padding: 0 1rem;
     width: 100%;
 }
 
