@@ -19,6 +19,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if(theme === 'dark') {
         ui.theme() 
     }
+    ui.refreshSelectedKB()
+
 })
 
 //event: toggle theme
@@ -41,6 +43,7 @@ select60.addEventListener('click', () => {
     kb60.classList.add('active')
     kb75.classList.remove('active')
     ui.closeModal()
+    storage.saveSelectedKB('sixty')
 })
 
 //event: select 75%
@@ -48,6 +51,7 @@ select75.addEventListener('click', () => {
     kb75.classList.add('active')
     kb60.classList.remove('active')
     ui.closeModal()
+    storage.saveSelectedKB('seventyFive')
 })
 
 //event: keydown
@@ -77,6 +81,12 @@ const storage = {
     },
     checkTheme() {
         return localStorage.getItem('keyboardapp.theme')
+    },
+    saveSelectedKB(value) {
+        localStorage.setItem('keyboardapp.selectedKB', `${value}`)
+    },
+    checkSelectedKB() {
+        return localStorage.getItem('keyboardapp.selectedKB')
     }
 
 }
@@ -98,6 +108,16 @@ const ui = {
         modalCons.forEach(modalCon => {
             modalCon.classList.remove('active')
         })
+    },
+    refreshSelectedKB(){
+        const selection = storage.checkSelectedKB()
+        if (!selection) {
+            return   
+        } else if (selection == 'sixty') {
+            kb60.classList.add('active')
+        } else if (selection == 'seventyFive'){
+            kb75.classList.add('active')
+        }
     }
 }
 
