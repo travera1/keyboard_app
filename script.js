@@ -95,10 +95,9 @@ select60.addEventListener('click', () => {
     storage.saveSelectedKB('sixty')
     ui.closeModal()
     ui.refreshSelectedContent()
-    rgbBtn.classList.remove('on')
-    void rgbBtn.offsetWidth  //**smart fix **/
-    rgbBtn.classList.add('on')
-   
+    if(rgbBtn.classList.contains('on')){
+        rgbBtnReset()
+    }
 })
 
 //event: select 75%
@@ -106,10 +105,9 @@ select75.addEventListener('click', () => {
     storage.saveSelectedKB('seventyFive')
     ui.closeModal()
     ui.refreshSelectedContent()
-    rgbBtn.classList.remove('on')
-    void rgbBtn.offsetWidth //**smart fix **/
-    rgbBtn.classList.add('on')
-
+    if(rgbBtn.classList.contains('on')){
+        rgbBtnReset()
+    }
 })
 
 //event: keydown
@@ -286,10 +284,15 @@ function setKeys() {
         return
     }
 }
+function rgbBtnReset() {
+    rgbBtn.classList.remove('on')
+    void rgbBtn.offsetWidth //**smart fix **/
+    rgbBtn.classList.add('on')
+}
 
 // color picker
 let picker = new Picker(document.getElementById('color-picker'),
-    300, 40)
+    300, 20)
 
 //Draw
 setInterval(() => picker.draw(), 1)
