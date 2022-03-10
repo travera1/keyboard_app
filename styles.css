@@ -252,6 +252,7 @@ footer ul a img {
     font-size: .7rem;
     display: flex;
     justify-content: center;
+    user-select: none;
     transition: background .2s linear;
 }
 
@@ -654,7 +655,7 @@ footer {
 
 .color-customization {
     display: none;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
 }
 .color-customization.active {
@@ -683,6 +684,7 @@ footer {
     cursor: pointer;
     background-color: var(--secondary);
     transition: all .2s linear;
+    user-select: none;
 }
 
 .btn.sub {
@@ -779,5 +781,36 @@ footer {
     100% {
         background-color: rgb(255, 17, 0);
     }
+}
+
+/* color picker */
+.color-picker-con {
+    /* display: flex; */
+}
+
+.selected {
+    text-align: center;
+    font-family: 'Roboto Mono';
+    padding: .5rem 0;
+    margin-top: .4rem;
+    font-weight: 500;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color: var(--secondary);
+    /* transition: all .1s linear; */
+    user-select: none;
+}
+
+#color-picker {
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+}
+
+.color-info {
+    width: 12em;
+    display: flex;
+    margin-left: 4em;
+    justify-content: space-between;
 }
 

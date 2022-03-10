@@ -1,3 +1,5 @@
+import Picker from './colorPicker.js'
+
 //QUERY SELECTORS
 const sixtyKeys = [...document.querySelectorAll('[data-kb-60] .key')]
 const seventyFiveKeys = [...document.querySelectorAll('[data-kb-75] .key')]
@@ -284,3 +286,15 @@ function setKeys() {
         return
     }
 }
+
+// color picker
+let picker = new Picker(document.getElementById('color-picker'),
+    300, 40)
+
+//Draw
+setInterval(() => picker.draw(), 1)
+
+picker.onChange((color) => {
+    let selected = document.querySelector(".selected")
+    selected.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`
+})

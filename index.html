@@ -12,13 +12,15 @@
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js" defer></script>
 </head>
 
 <body class="flex-grow">
     <header class="container">
         <div class="nav-info">
-            <a href="#"><div class="logo" data-home>Keyboard Customizer</div></a>
+            <a href="#">
+                <div class="logo" data-home>Keyboard Customizer</div>
+            </a>
             <nav class="main-nav">
                 <ul>
                     <li>
@@ -47,7 +49,11 @@
         <div class="container flex">
             <div class="color-customization" data-color-customization>
                 <div class="customization-container">
-                    <div class="btn">Color</div>
+                    <!-- <h2>Color Picker</h2> -->
+                    <div class="color-picker-con">
+                        <canvas id="color-picker"></canvas>
+                        <div class="selected">Selected Color</div>
+                    </div>
                 </div>
                 <div class="customization-container">
                     <div class="btn rgb-btn" data-rgb-btn>RGB Cycle</div>
@@ -62,18 +68,24 @@
         <div class="container flex">
             <div class="about-info" data-info>
                 <h2 class="title">about</h2>
-                <p class="text">Keyboard Custimization is a website created to allow freedom to customize keyboards, presented in a minimalistic layout. Features include theme selection, keyboard layouts, colors, rgb options...etc</p>
+                <p class="text">Keyboard Custimization is a website created to allow freedom to customize keyboards,
+                    presented in a minimalistic layout. Features include theme selection, keyboard layouts, colors, rgb
+                    options...etc</p>
                 <p class="text-title">keyboard selection</p>
-                <p class="text">Users can chooose between different keyboard sizes, the most poplular being 60 Percent and 75 Percent</p>
+                <p class="text">Users can chooose between different keyboard sizes, the most poplular being 60 Percent
+                    and 75 Percent</p>
                 <p class="text-title">dark mode</p>
                 <p class="text">dark mode can be toggled on and off, (preferrably on :)</p>
                 <p class="text-title">command line</p>
-                <p class="text">The command line can be opened using the<span>esc</span>key. (Feature coming soon...)</p>
+                <p class="text">The command line can be opened using the<span>esc</span>key. (Feature coming soon...)
+                </p>
                 <p class="text-title">rgb customization</p>
-                <p class="text">Enable rgb cycle to make your keyboard pop. Choose between slow, medium, and fast speeds.</p>
+                <p class="text">Enable rgb cycle to make your keyboard pop. Choose between slow, medium, and fast
+                    speeds.</p>
                 <p class="text-title">color customization</p>
-                <p class="text"> In addition to the rgb options, the keyboard color can be selected from an all-encompassing list to create a truly unique keyboard!</p>
-                
+                <p class="text"> In addition to the rgb options, the keyboard color can be selected from an
+                    all-encompassing list to create a truly unique keyboard!</p>
+
             </div>
         </div>
         <div class="container flex">
@@ -267,8 +279,11 @@
             </div>
         </div>
     </div>
-    <footer class="container" >
-        <ul><li><a href="https://github.com/travera1/keyboard_app"><img src="images/github.svg" alt="github">GitHub</a></li></ul>
+    <footer class="container">
+        <ul>
+            <li><a href="https://github.com/travera1/keyboard_app"><img src="images/github.svg" alt="github">GitHub</a>
+            </li>
+        </ul>
     </footer>
     <div class="modal-con modal-sel-kb-con" data-modal-sel-kb-con>
         <div class="modal modal-sel-kb">
