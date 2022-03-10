@@ -15,6 +15,9 @@ const kb75 = document.querySelector('[data-kb-75]')
 const aboutBtn = document.querySelector('[data-info-btn]')
 const aboutInfo = document.querySelector('[data-info]')
 const homeBtn = document.querySelector('[data-home]')
+const rgbBtn = document.querySelector('[data-rgb-btn]')
+
+
 
 //stores keys of current kb type
 let keys 
@@ -42,6 +45,13 @@ homeBtn.addEventListener('click', () => {
 aboutBtn.addEventListener('click', () => {
    storage.saveSelectedContent('about')
    ui.refreshSelectedContent()
+})
+
+//event: rgb btn 
+
+rgbBtn.addEventListener('click', () => {
+    keys.forEach(key => key.classList.toggle('on'))
+    rgbBtn.classList.toggle('on')
 })
 
 //event: open select-kb modal

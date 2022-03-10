@@ -650,3 +650,123 @@ footer {
         transform: scale(.34);
     }
 }
+
+.color-customization {
+    /* display: none; */
+}
+
+.color-customization {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.key.on {
+    animation-name: rgb-cycle;
+    animation-iteration-count: infinite;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+}
+
+.rgb-btn {
+    font-family: 'Roboto Mono';
+    padding: .5rem 2rem;
+    margin: 2rem;
+    font-weight: 500;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color: var(--secondary);
+    transition: all .2s linear;
+}
+
+.rgb-btn:hover, .rgb-btn:focus {
+    /* background-color: var(--accent);
+    color: #111; */
+    border-color: var(--accent) 
+}
+
+.rgb-btn.on {
+    animation-name: rgb-cycle;
+    animation-iteration-count: infinite;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+}
+
+.rgb-test {
+    width: 100px;
+    height: 100px;
+    display: none;
+
+}
+
+.rgb-cycle {
+    animation-name: rgb-cycle;
+    animation-iteration-count: infinite;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+ 
+}
+@keyframes rgb-cycle {
+    0% {
+        border-color: red;
+        color: red;
+    }
+    14% {
+        border-color: rgb(219, 28, 203);
+        color: rgb(219, 28, 203);
+    }
+    28% {
+        border-color: rgb(119, 19, 177);
+        color: rgb(119, 19, 177);
+    }
+    43% {
+        border-color: rgb(15, 63, 196);
+        color: rgb(15, 63, 196);
+    }
+    57% {
+        border-color: cyan;
+        color: cyan;
+    }
+    71% {
+        border-color: rgb(17, 212, 17);
+        color: rgb(17, 212, 17);
+    }
+    86% {
+        border-color: rgb(255, 196, 0);
+        color: rgb(255, 196, 0);
+    }
+    100% {
+        border-color: rgb(255, 17, 0);
+        color: rgb(255, 17, 0);
+    }
+}
+
+@keyframes rgb-background-cycle {
+    0% {
+        
+        background-color: red;
+    }
+    14% {
+        background-color: rgb(219, 28, 203);
+    }
+    28% {
+        background-color: rgb(119, 19, 177);
+    }
+    43% {
+        background-color: rgb(15, 63, 196);
+    }
+    57% {
+        background-color: cyan;
+    }
+    71% {
+        background-color: rgb(17, 212, 17);
+    }
+    86% {
+        background-color: rgb(255, 196, 0);
+    }
+    100% {
+        background-color: rgb(255, 17, 0);
+    }
+}
+
