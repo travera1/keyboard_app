@@ -1,0 +1,1 @@
+#switching between keyboard resets the onkey rgb cycle, but doesnt on rgb button. --fixed

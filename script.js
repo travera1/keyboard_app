@@ -1,6 +1,4 @@
 //QUERY SELECTORS
-// const keyboard = document.querySelector('[data-keyboard]')
-// const keys = [...document.querySelectorAll('.key')]
 const sixtyKeys = [...document.querySelectorAll('[data-kb-60] .key')]
 const seventyFiveKeys = [...document.querySelectorAll('[data-kb-75] .key')]
 
@@ -18,11 +16,6 @@ const homeBtn = document.querySelector('[data-home]')
 const colorCustomization = document.querySelector('[data-color-customization]')
 const rgbBtn = document.querySelector('[data-rgb-btn]')
 const rgbSpeedCon = document.querySelector('[data-rgb-speed-con]')
-
-// const rgbSlowBtn = document.querySelector('[data-rgb-slow-btn]')
-// const rgbMedBtn = document.querySelector('[data-rgb-med-btn]')
-// const rgbFastBtn = document.querySelector('[data-rgb-fast-btn]')
-
 
 //keyboards
 const keyboards = [
@@ -99,22 +92,21 @@ document.addEventListener('keydown', e => {
 select60.addEventListener('click', () => {
     storage.saveSelectedKB('sixty')
     ui.closeModal()
-    rgbBtn.style.display = 'none'
-    rgbBtn.style.display = 'block'
     ui.refreshSelectedContent()
-
-
+    rgbBtn.classList.remove('on')
+    void rgbBtn.offsetWidth  //**smart fix **/
+    rgbBtn.classList.add('on')
+   
 })
 
 //event: select 75%
 select75.addEventListener('click', () => {
     storage.saveSelectedKB('seventyFive')
     ui.closeModal()
-    rgbBtn.style.display = 'none'
-    rgbBtn.style.display = 'block'
     ui.refreshSelectedContent()
-
-
+    rgbBtn.classList.remove('on')
+    void rgbBtn.offsetWidth //**smart fix **/
+    rgbBtn.classList.add('on')
 
 })
 
@@ -140,11 +132,7 @@ document.addEventListener('keyup', e => {
 
 })
 
-
-
-
 //FUNCTIONS 
-
 const storage = {
     saveTheme(value) {
         localStorage.setItem('keyboardapp.theme', `${value}`)
@@ -178,8 +166,6 @@ const storage = {
     checkRgbSpeed() {
         return localStorage.getItem('keyboardapp.rgbSpeed')
     },
-
-
 }
 
 const ui = {
@@ -201,7 +187,6 @@ const ui = {
         sixtyKeys.forEach(key => key.classList.toggle('on'))
 
         rgbBtn.classList.toggle('on')
-        console.log(rgbBtn)
         if (rgbBtn.classList.contains('on')) {
             storage.saveRgbCycle('on')
         } else {
@@ -213,15 +198,19 @@ const ui = {
         rgbBtn.classList.remove('rgb-med')
         rgbBtn.classList.remove('rgb-fast')
         rgbBtn.classList.add(`rgb-${speed}`)
-        //if window load, keys are undefined
-        if (keys != undefined) {
-            keys.forEach(key => {
-                key.classList.remove('rgb-slow')
-                key.classList.remove('rgb-med')
-                key.classList.remove('rgb-fast')
-                key.classList.add(`rgb-${speed}`)
-            })
-        }
+      
+        seventyFiveKeys.forEach(key => {
+            key.classList.remove('rgb-slow')
+            key.classList.remove('rgb-med')
+            key.classList.remove('rgb-fast')
+            key.classList.add(`rgb-${speed}`)
+        })
+        sixtyKeys.forEach(key => {
+            key.classList.remove('rgb-slow')
+            key.classList.remove('rgb-med')
+            key.classList.remove('rgb-fast')
+            key.classList.add(`rgb-${speed}`)
+        })
         storage.saveRgbSpeed(speed)
     },
     closeModal() {
@@ -283,11 +272,8 @@ const ui = {
             aboutInfo.classList.add('active')
         }
     }
-
 }
-
 // helpers 
-
 function setKeys() {
     const kbType = storage.checkSelectedKB()
     if (kbType == 'sixty') {
@@ -298,8 +284,3 @@ function setKeys() {
         return
     }
 }
-
-
-
-
-
