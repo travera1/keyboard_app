@@ -804,8 +804,7 @@ footer {
     padding: .2rem 0;
     width: 100%;
     text-align: center;
-    font-weight: 500;
-    border-radius: 12px;
+    font-weight: 500;    
     background-color: var(--secondary);
 }
 .selected {
@@ -814,7 +813,7 @@ footer {
     height: 100%;
     width: 30%;
     font-weight: 500;
-    background-color: var(--secondary);
+    background-color: var(--accent);
     /* transition: all .1s linear; */
     user-select: none;
 }
