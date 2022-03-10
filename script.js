@@ -236,7 +236,13 @@ const ui = {
             ui.theme()
         }
         //initialize kb selection
-        storage.saveSelectedKB('sixty')
+        if(storage.checkSelectedKB() == null) {
+            storage.saveSelectedKB('sixty')
+        }
+        //initialize selected content selection
+        if(storage.checkSelectedContent() == null) {
+            storage.saveSelectedContent('home')
+        }
         //update rgb
         const rgbCycle = storage.checkRgbCycle()
         if (rgbCycle === 'on') {
