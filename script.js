@@ -235,6 +235,8 @@ const ui = {
         if (theme === 'dark') {
             ui.theme()
         }
+        //initialize kb selection
+        storage.saveSelectedKB('sixty')
         //update rgb
         const rgbCycle = storage.checkRgbCycle()
         if (rgbCycle === 'on') {
@@ -242,11 +244,13 @@ const ui = {
         }
         //update rgb speed
         const rgbSpeed = storage.checkRgbSpeed()
-        ui.rgbSpeed(rgbSpeed)
-        const speedBtn = rgbSpeedBtns.find(btn => {
-            return btn.dataset.speed == rgbSpeed
-        })
-        speedBtn.style.borderColor = '#999'
+        if(rgbSpeed){
+            ui.rgbSpeed(rgbSpeed)
+            const speedBtn = rgbSpeedBtns.find(btn => {
+                return btn.dataset.speed == rgbSpeed
+            })
+            speedBtn.style.borderColor = '#999'
+        }
         //update color
     },
     refreshSelectedContent() {
