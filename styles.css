@@ -159,7 +159,7 @@ footer ul a img {
     
 }
 .main-container{
-    margin: 0 auto;
+    margin: 0;
     flex-grow: 1;
 }
 .flex-grow {
@@ -634,7 +634,7 @@ footer {
     height: min-content;
     flex: 0 0 auto;
     display: inline-block;
-    margin:0;
+    margin: 0;
     transition: all 30ms linear;
     top: 3px;
 } 
@@ -653,26 +653,30 @@ footer {
 }
 
 .color-customization {
-    /* display: none; */
-}
-
-.color-customization {
-    display: flex;
+    display: none;
     justify-content: flex-end;
     width: 100%;
 }
-
-.key.on {
-    animation-name: rgb-cycle;
-    animation-iteration-count: infinite;
-    animation-duration: 20s;
-    animation-timing-function: linear;
+.color-customization.active {
+    display: flex;
 }
-
-.rgb-btn {
+.customization-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+.customization-container:not(:last-of-type){
+    margin-right: 2rem;
+}
+.rgb-speed-container {
+    display: flex;
+    
+}
+.btn {
+    text-align: center;
     font-family: 'Roboto Mono';
     padding: .5rem 2rem;
-    margin: 2rem;
+    margin: .3rem .3rem;
     font-weight: 500;
     border-radius: 30px;
     border: 1px solid transparent;
@@ -681,33 +685,39 @@ footer {
     transition: all .2s linear;
 }
 
-.rgb-btn:hover, .rgb-btn:focus {
+.btn.sub {
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    padding: .2rem .5rem;
+    font-size: .9rem;
+}
+
+.btn:hover, .rgb-btn:focus {
     /* background-color: var(--accent);
     color: #111; */
-    border-color: var(--accent) 
+    border-color: var(--accent);
 }
 
-.rgb-btn.on {
+.rgb-btn.on, .key.on {
     animation-name: rgb-cycle;
     animation-iteration-count: infinite;
     animation-duration: 20s;
     animation-timing-function: linear;
 }
 
-.rgb-test {
-    width: 100px;
-    height: 100px;
-    display: none;
-
+.rgb-fast {
+    animation-duration: 4s !important;
+    /* background-color: pink; */
+}
+.rgb-med {
+    animation-duration: 10s !important;
+    /* background-color: yellow; */
+}
+.rgb-slow {
+    animation-duration: 20s !important;
+    /* background-color: lightblue; */
 }
 
-.rgb-cycle {
-    animation-name: rgb-cycle;
-    animation-iteration-count: infinite;
-    animation-duration: 20s;
-    animation-timing-function: linear;
- 
-}
 @keyframes rgb-cycle {
     0% {
         border-color: red;

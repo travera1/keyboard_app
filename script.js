@@ -15,7 +15,13 @@ const kb75 = document.querySelector('[data-kb-75]')
 const aboutBtn = document.querySelector('[data-info-btn]')
 const aboutInfo = document.querySelector('[data-info]')
 const homeBtn = document.querySelector('[data-home]')
+const colorCustomization = document.querySelector('[data-color-customization]')
 const rgbBtn = document.querySelector('[data-rgb-btn]')
+const rgbSpeedCon = document.querySelector('[data-rgb-speed-con]')
+
+// const rgbSlowBtn = document.querySelector('[data-rgb-slow-btn]')
+// const rgbMedBtn = document.querySelector('[data-rgb-med-btn]')
+// const rgbFastBtn = document.querySelector('[data-rgb-fast-btn]')
 
 
 //keyboards
@@ -44,20 +50,8 @@ let keys
 
 //event: window load
 window.addEventListener('DOMContentLoaded', () => {
-    //update theme
-    const theme = storage.checkTheme()
-    if (theme === 'dark') {
-        ui.theme()
-    }
-
-    const colorCycle = storage.checkRgbCycle()
-    if (colorCycle === 'on') {
-        ui.rgbCycle()
-    }
-
+    ui.initializeSettings()
     ui.refreshSelectedContent()
-
-
 })
 
 //event: home btn 
@@ -72,6 +66,16 @@ aboutBtn.addEventListener('click', () => {
     ui.refreshSelectedContent()
 })
 
+//events: rgb speed btns
+const rgbSpeedBtns = [...rgbSpeedCon.children]
+rgbSpeedBtns.forEach(btn => {
+    const speed = btn.dataset.speed
+    btn.addEventListener('click', () => {
+        rgbSpeedBtns.forEach(btn => btn.style.borderColor = 'transparent')
+        btn.style.borderColor = '#999'
+        ui.rgbSpeed(speed)
+    })
+})
 //event: rgb btn 
 rgbBtn.addEventListener('click', () => ui.rgbCycle())
 
@@ -168,6 +172,12 @@ const storage = {
     checkRgbCycle() {
         return localStorage.getItem('keyboardapp.rgbCycle')
     },
+    saveRgbSpeed(value) {
+        localStorage.setItem('keyboardapp.rgbSpeed', `${value}`)
+    },
+    checkRgbSpeed() {
+        return localStorage.getItem('keyboardapp.rgbSpeed')
+    },
 
 
 }
@@ -191,16 +201,53 @@ const ui = {
         sixtyKeys.forEach(key => key.classList.toggle('on'))
 
         rgbBtn.classList.toggle('on')
+        console.log(rgbBtn)
         if (rgbBtn.classList.contains('on')) {
             storage.saveRgbCycle('on')
         } else {
             storage.saveRgbCycle('off')
         }
     },
+    rgbSpeed(speed) {
+        rgbBtn.classList.remove('rgb-slow')
+        rgbBtn.classList.remove('rgb-med')
+        rgbBtn.classList.remove('rgb-fast')
+        rgbBtn.classList.add(`rgb-${speed}`)
+        //if window load, keys are undefined
+        if (keys != undefined) {
+            keys.forEach(key => {
+                key.classList.remove('rgb-slow')
+                key.classList.remove('rgb-med')
+                key.classList.remove('rgb-fast')
+                key.classList.add(`rgb-${speed}`)
+            })
+        }
+        storage.saveRgbSpeed(speed)
+    },
     closeModal() {
         modalCons.forEach(modalCon => {
             modalCon.classList.remove('active')
         })
+    },
+    initializeSettings() {
+        //update theme
+        const theme = storage.checkTheme()
+        if (theme === 'dark') {
+            ui.theme()
+        }
+        //update rgb
+        const rgbCycle = storage.checkRgbCycle()
+        if (rgbCycle === 'on') {
+            ui.rgbCycle()
+        }
+        //update rgb speed
+        const rgbSpeed = storage.checkRgbSpeed()
+        ui.rgbSpeed(rgbSpeed)
+        const speedBtn = rgbSpeedBtns.find(btn => {
+            return btn.dataset.speed == rgbSpeed
+        })
+        speedBtn.style.borderColor = '#999'
+        //update color
     },
     refreshSelectedContent() {
         const activeElements = [...document.querySelectorAll('.active')]
@@ -211,6 +258,7 @@ const ui = {
         if (!selection) {
             return
         } else if (selection == 'home') {
+            colorCustomization.classList.add('active')
             const kbSelection = storage.checkSelectedKB()
             if (!kbSelection) {
                 return
