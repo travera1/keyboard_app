@@ -18,9 +18,27 @@ const homeBtn = document.querySelector('[data-home]')
 const rgbBtn = document.querySelector('[data-rgb-btn]')
 
 
-
+//keyboards
+const keyboards = [
+    {
+        name: 'sixty',
+        size: 'sixty',
+        keys: sixtyKeys,
+        rgbCycle: false,
+        cycleLength: 'slow',
+        isActive: 'false',
+    },
+    {
+        name: 'seventyFive',
+        size: 'seventyFive',
+        keys: seventyFiveKeys,
+        rgbCycle: false,
+        cycleLength: 'slow',
+        isActive: 'false',
+    }
+]
 //stores keys of current kb type
-let keys 
+let keys
 
 //EVENT LISTENERS
 
@@ -28,10 +46,17 @@ let keys
 window.addEventListener('DOMContentLoaded', () => {
     //update theme
     const theme = storage.checkTheme()
-    if(theme === 'dark') {
-        ui.theme() 
+    if (theme === 'dark') {
+        ui.theme()
     }
+
+    const colorCycle = storage.checkRgbCycle()
+    if (colorCycle === 'on') {
+        ui.rgbCycle()
+    }
+
     ui.refreshSelectedContent()
+
 
 })
 
@@ -43,16 +68,13 @@ homeBtn.addEventListener('click', () => {
 
 //event: about btn
 aboutBtn.addEventListener('click', () => {
-   storage.saveSelectedContent('about')
-   ui.refreshSelectedContent()
+    storage.saveSelectedContent('about')
+    ui.refreshSelectedContent()
 })
 
 //event: rgb btn 
+rgbBtn.addEventListener('click', () => ui.rgbCycle())
 
-rgbBtn.addEventListener('click', () => {
-    keys.forEach(key => key.classList.toggle('on'))
-    rgbBtn.classList.toggle('on')
-})
 
 //event: open select-kb modal
 selectKBbtn.addEventListener('click', () => {
@@ -63,8 +85,8 @@ selectKBbtn.addEventListener('click', () => {
 box.addEventListener('change', () => ui.theme())
 
 //event: escape key to close
-document.addEventListener('keydown', e =>{
-    if(e.code == 'Escape') {
+document.addEventListener('keydown', e => {
+    if (e.code == 'Escape') {
         ui.closeModal()
     }
 })
@@ -73,27 +95,34 @@ document.addEventListener('keydown', e =>{
 select60.addEventListener('click', () => {
     storage.saveSelectedKB('sixty')
     ui.closeModal()
+    rgbBtn.style.display = 'none'
+    rgbBtn.style.display = 'block'
     ui.refreshSelectedContent()
-    
+
+
 })
 
 //event: select 75%
 select75.addEventListener('click', () => {
     storage.saveSelectedKB('seventyFive')
     ui.closeModal()
+    rgbBtn.style.display = 'none'
+    rgbBtn.style.display = 'block'
     ui.refreshSelectedContent()
-    
+
+
+
 })
 
 //event: keydown
 document.addEventListener('keydown', e => {
 
-        const key = keys.find(key => {
-            return key.dataset.key === e.code
-        })
-        if(key != undefined){
-            key.classList.add('active')
-        }
+    const key = keys.find(key => {
+        return key.dataset.key === e.code
+    })
+    if (key != undefined) {
+        key.classList.add('active')
+    }
 })
 
 //event: keyup
@@ -101,7 +130,7 @@ document.addEventListener('keyup', e => {
     const key = keys.find(key => {
         return key.dataset.key === e.code
     })
-    if(key != undefined){
+    if (key != undefined) {
         key.classList.remove('active')
     }
 
@@ -132,7 +161,14 @@ const storage = {
     checkSelectedContent() {
         return localStorage.getItem('keyboardapp.selectedContent')
 
-    }
+    },
+    saveRgbCycle(value) {
+        localStorage.setItem('keyboardapp.rgbCycle', `${value}`)
+    },
+    checkRgbCycle() {
+        return localStorage.getItem('keyboardapp.rgbCycle')
+    },
+
 
 }
 
@@ -149,27 +185,39 @@ const ui = {
             ball.style.transform = 'translate(0px)'
         }
     },
+    rgbCycle() {
+        setKeys()
+        seventyFiveKeys.forEach(key => key.classList.toggle('on'))
+        sixtyKeys.forEach(key => key.classList.toggle('on'))
+
+        rgbBtn.classList.toggle('on')
+        if (rgbBtn.classList.contains('on')) {
+            storage.saveRgbCycle('on')
+        } else {
+            storage.saveRgbCycle('off')
+        }
+    },
     closeModal() {
         modalCons.forEach(modalCon => {
             modalCon.classList.remove('active')
         })
     },
-    refreshSelectedContent(){
+    refreshSelectedContent() {
         const activeElements = [...document.querySelectorAll('.active')]
         activeElements.forEach(element => {
             element.classList.remove('active')
         })
         const selection = storage.checkSelectedContent()
         if (!selection) {
-            return   
+            return
         } else if (selection == 'home') {
             const kbSelection = storage.checkSelectedKB()
-            if(!kbSelection) {
+            if (!kbSelection) {
                 return
             } else if (kbSelection == 'sixty') {
                 kb60.classList.add('active')
                 setKeys('sixty')
-            } else if (kbSelection == 'seventyFive'){
+            } else if (kbSelection == 'seventyFive') {
                 kb75.classList.add('active')
                 setKeys('seventyFive')
             }
@@ -177,17 +225,17 @@ const ui = {
             aboutInfo.classList.add('active')
         }
     }
-   
+
 }
 
 // helpers 
 
 function setKeys() {
     const kbType = storage.checkSelectedKB()
-    if(kbType == 'sixty') {
+    if (kbType == 'sixty') {
         keys = sixtyKeys
     } else if (kbType == 'seventyFive') {
-        keys =  seventyFiveKeys
+        keys = seventyFiveKeys
     } else {
         return
     }

@@ -6,10 +6,11 @@
 
 body {
     --accent: #999;
-    --primary: #ccc;
+    --primary: #fefeff;
     --secondary: #eee;
 
     margin: 0 auto;
+    padding: 0 2rem;
     height: 100vh;
     color: var(--accent);
     background-color: var(--primary);
@@ -547,7 +548,7 @@ footer ul a img {
     font-weight: 400;
     display: none;
     font-family: 'Roboto Mono', monospace;
-    padding: 1rem 4rem;
+    padding: 1rem 0;
     font-size: 1.2rem;
 }
 
@@ -581,7 +582,7 @@ footer ul a img {
 
 footer {
     margin: 1rem 0 1.5rem;
-    padding: 0 1rem;
+    padding: 0;
     width: 100%;
 }
 
