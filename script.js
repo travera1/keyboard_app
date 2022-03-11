@@ -18,6 +18,8 @@ const homeBtn = document.querySelector('[data-home]')
 const colorCustomization = document.querySelector('[data-color-customization]')
 const rgbBtn = document.querySelector('[data-rgb-btn]')
 const rgbSpeedCon = document.querySelector('[data-rgb-speed-con]')
+const colorPicker = document.querySelector('[data-color-picker]')
+const selectedColor = document.querySelector('[data-selected-color]')
 
 //keyboards
 const keyboards = [
@@ -74,6 +76,8 @@ rgbSpeedBtns.forEach(btn => {
 //event: rgb btn 
 rgbBtn.addEventListener('click', () => ui.rgbCycle())
 
+//event color pick
+colorPicker.addEventListener('click', () => ui.pickColor())
 
 //event: open select-kb modal
 selectKBbtn.addEventListener('click', () => {
@@ -166,6 +170,12 @@ const storage = {
     checkRgbSpeed() {
         return localStorage.getItem('keyboardapp.rgbSpeed')
     },
+    saveKeyColor(value) {
+        localStorage.setItem('keyboardapp.keyColor', `${value}`)
+    },
+    checkKeyColor() {
+        return localStorage.getItem('keyboardapp.keyColor')
+    },
 }
 
 const ui = {
@@ -212,6 +222,12 @@ const ui = {
             key.classList.add(`rgb-${speed}`)
         })
         storage.saveRgbSpeed(speed)
+    },
+    pickColor(){
+        const color = window.getComputedStyle(selectedColor , null).getPropertyValue('background-color');
+        keys.forEach(key => {
+            key.style.backgroundColor = color
+        })
     },
     closeModal() {
         modalCons.forEach(modalCon => {
