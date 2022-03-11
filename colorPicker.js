@@ -8,7 +8,7 @@ export default class Picker {
         //get context
         this.context = this.target.getContext("2d")
         //circle
-        this.pickerCircle = { x: 10, y: 10, width: 7, height: 7 }
+        this.pickerCircle = { x: 10, y: 10, width: 4, height: 4 }
 
         this.listenForEvents()
     }

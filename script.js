@@ -77,7 +77,10 @@ rgbSpeedBtns.forEach(btn => {
 rgbBtn.addEventListener('click', () => ui.rgbCycle())
 
 //event color pick
-colorPicker.addEventListener('click', () => ui.pickColor())
+colorPicker.addEventListener('click', () => {
+    storage.saveKeyColor(pickedcolor)
+})
+
 
 //event: open select-kb modal
 selectKBbtn.addEventListener('click', () => {
@@ -99,7 +102,7 @@ select60.addEventListener('click', () => {
     storage.saveSelectedKB('sixty')
     ui.closeModal()
     ui.refreshSelectedContent()
-    if(rgbBtn.classList.contains('on')){
+    if (rgbBtn.classList.contains('on')) {
         rgbBtnReset()
     }
 })
@@ -109,7 +112,7 @@ select75.addEventListener('click', () => {
     storage.saveSelectedKB('seventyFive')
     ui.closeModal()
     ui.refreshSelectedContent()
-    if(rgbBtn.classList.contains('on')){
+    if (rgbBtn.classList.contains('on')) {
         rgbBtnReset()
     }
 })
@@ -176,6 +179,18 @@ const storage = {
     checkKeyColor() {
         return localStorage.getItem('keyboardapp.keyColor')
     },
+    savePickerCircleX(value) {
+        localStorage.setItem('keyboardapp.pickerCircleX', `${value}`)
+    },
+    checkPickerCircleX() {
+        return localStorage.getItem('keyboardapp.pickerCircleX')
+    },
+    savePickerCircleY(value) {
+        localStorage.setItem('keyboardapp.pickerCircleY', `${value}`)
+    },
+    checkPickerCircleY() {
+        return localStorage.getItem('keyboardapp.pickerCircleY')
+    },
 }
 
 const ui = {
@@ -208,7 +223,7 @@ const ui = {
         rgbBtn.classList.remove('rgb-med')
         rgbBtn.classList.remove('rgb-fast')
         rgbBtn.classList.add(`rgb-${speed}`)
-      
+
         seventyFiveKeys.forEach(key => {
             key.classList.remove('rgb-slow')
             key.classList.remove('rgb-med')
@@ -223,15 +238,6 @@ const ui = {
         })
         storage.saveRgbSpeed(speed)
     },
-    pickColor(){
-        const color = window.getComputedStyle(selectedColor , null).getPropertyValue('background-color');
-        seventyFiveKeys.forEach(key => {
-            key.style.backgroundColor = color
-        })
-        sixtyKeys.forEach(key => {
-            key.style.backgroundColor = color
-        })
-    },
     closeModal() {
         modalCons.forEach(modalCon => {
             modalCon.classList.remove('active')
@@ -244,11 +250,11 @@ const ui = {
             ui.theme()
         }
         //initialize kb selection
-        if(storage.checkSelectedKB() == null) {
+        if (storage.checkSelectedKB() == null) {
             storage.saveSelectedKB('sixty')
         }
         //initialize selected content selection
-        if(storage.checkSelectedContent() == null) {
+        if (storage.checkSelectedContent() == null) {
             storage.saveSelectedContent('home')
         }
         //update rgb
@@ -258,14 +264,30 @@ const ui = {
         }
         //update rgb speed
         const rgbSpeed = storage.checkRgbSpeed()
-        if(rgbSpeed){
+        if (rgbSpeed) {
             ui.rgbSpeed(rgbSpeed)
             const speedBtn = rgbSpeedBtns.find(btn => {
                 return btn.dataset.speed == rgbSpeed
             })
             speedBtn.style.borderColor = '#999'
         }
-        //update color
+        ///update key color
+        if(storage.checkKeyColor()) {
+            const color = storage.checkKeyColor()
+            //update colorPicker coords
+            picker.pickerCircle.x = storage.checkPickerCircleX()
+            picker.pickerCircle.y = storage.checkPickerCircleY()
+            //update key color
+            sixtyKeys.forEach(key => {
+                key.style.backgroundColor = color
+            })
+            seventyFiveKeys.forEach(key => {
+                key.style.backgroundColor = color
+            })
+            //update selected color
+            selectedColor.style.backgroundColor = color
+            
+        }
     },
     refreshSelectedContent() {
         const activeElements = [...document.querySelectorAll('.active')]
@@ -315,8 +337,19 @@ let picker = new Picker(document.getElementById('color-picker'),
 
 //Draw
 setInterval(() => picker.draw(), 1)
-
+let pickedcolor
 picker.onChange((color) => {
+    pickedcolor = `rgb(${color.r}, ${color.g}, ${color.b})`
     let selected = document.querySelector(".selected")
-    selected.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`
+    selected.style.backgroundColor = pickedcolor
+
+    seventyFiveKeys.forEach(key => {
+        key.style.backgroundColor = pickedcolor
+    })
+    sixtyKeys.forEach(key => {
+        key.style.backgroundColor = pickedcolor
+    })
+    storage.savePickerCircleX(picker.pickerCircle.x)
+    storage.savePickerCircleY(picker.pickerCircle.y)
+    storage.saveKeyColor(pickedcolor)
 })

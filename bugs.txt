@@ -1,1 +1,7 @@
 #switching between keyboard resets the onkey rgb cycle, but doesnt on rgb button. --fixed
+
+
+#fix keydown event when keys are pressed not showing color
+
+future features: add default key color btn
+
