@@ -225,7 +225,10 @@ const ui = {
     },
     pickColor(){
         const color = window.getComputedStyle(selectedColor , null).getPropertyValue('background-color');
-        keys.forEach(key => {
+        seventyFiveKeys.forEach(key => {
+            key.style.backgroundColor = color
+        })
+        sixtyKeys.forEach(key => {
             key.style.backgroundColor = color
         })
     },

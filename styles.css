@@ -186,8 +186,10 @@ footer ul a img {
 }
 
 .keyboard {
-    padding: .5rem;
+    padding: 8px;
     display: grid;
+    /* border: 6px solid var(--primary);
+    border-radius: 7px; */
 }
 .row {
     display: flex;
