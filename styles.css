@@ -260,8 +260,8 @@ footer ul a img {
 
 .sixty .key {
     height: 55px;
-    padding-left: .7rem;
-    padding-right: .7rem;
+    padding-left: .85rem;
+    padding-right: .85rem;
 }
 .dark .key {
     background: var(--primary);
