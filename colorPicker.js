@@ -60,6 +60,7 @@ export default class Picker {
                 this.pickerCircle.x = currentX
                 this.pickerCircle.y = currentY
             }
+            this.onChangeCallback(this.getPickedColor())
         }
         const onMouseMove = (e) => {
             if (isMouseDown) {
@@ -77,7 +78,7 @@ export default class Picker {
         //register 
         this.target.addEventListener('mousedown', onMouseDown)
         this.target.addEventListener('mousemove', onMouseMove)
-        this.target.addEventListener('mousemove', () => this.onChangeCallback(this.getPickedColor()))
+        // this.target.addEventListener('mousemove', () => this.onChangeCallback(this.getPickedColor()))
 
         document.addEventListener('mouseup', onMouseUp)
     }

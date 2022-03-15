@@ -4,4 +4,3 @@
 #fix keydown event when keys are pressed not showing color
 
 future features: add default key color btn
-
